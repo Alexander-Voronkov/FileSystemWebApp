@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = Model.Name;
+}
+
+@using System.IO;
+@model FolderViewModel
+
+<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+@if(ViewBag.Url is string url && !string.IsNullOrEmpty(url) && !string.IsNullOrWhiteSpace(url))
+{
+    url = url.Replace(Model.Name!, "");
+    <a class="btn btn-warning mb-5" asp-controller="Home" asp-action="Root" asp-route-path="@url">Back to @Model.ParentFolder.Name</a>
+}
+
+<div class="display-4">Current Folder: @Model.Name</div>
+
+<br />
+<div class="display-6">Subfolders</div>
+<ul>
+    @if(Model.Subfolders!.Count != 0)
+    {
+        @foreach (var folder in Model.Subfolders)
+        {
+            <li>
+                @{
+                    var temp1 = System.IO.Path.Combine(((ViewBag.Url as string) ?? ""), folder.Name!).Replace(@"\\",@"/");
+                }
+                <a asp-controller="Home" asp-action="Root" asp-route-path="@temp1">@folder.Name</a>
+
+                <form class ="d-inline-block mx-3" asp-action="DeleteFolder" asp-controller="Home" method="post">
+                    <input type="hidden" name="folderId" value="@folder.Id">
+                    <button type="submit" class="btn btn-danger py-0">Remove</button>
+                </form>
+            </li>
+        }
+    }
+</ul>
+<br />
+<div class="display-6">Subfiles</div>
+<ul>
+    @if (Model.Subfiles!.Count != 0)
+    {
+        @foreach (var file in Model.Subfiles)
+        {
+            <li>
+                @{
+                    var temp2 = System.IO.Path.Combine(((ViewBag.Url as string) ?? ""), file.Name!).Replace(@"\\", @"/");
+                }
+                <a asp-controller="Home" asp-action="Root" asp-route-path="@temp2">@file.Name</a>
+                <form class="d-inline-block mx-3" asp-action="DeleteFile" asp-controller="Home" method="post">
+                    <input type="hidden" name="fileId" value="@file.Id">
+                    <button type="submit" class="btn btn-danger py-0">Remove</button>
+                </form>
+            </li>
+        }
+    }
+</ul>
+
+<a asp-controller="Home" asp-route-folderid="@Model.Id" asp-action="AddNewFile" class="btn btn-info">Add new file</a>
+<a asp-controller="Home" asp-route-parentFolderId="@Model.Id" asp-action="AddNewFolder" class="btn btn-info">Add new folder</a>
+<a href="/" class="btn btn-danger">Back to root</a>
+
+
+
+

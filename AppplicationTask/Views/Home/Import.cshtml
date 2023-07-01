@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Import";
+}
+
+@model FileViewModel
+
+<form enctype="multipart/form-data" method="post" asp-action="Import" asp-controller="Home">
+    <h2 class="text-danger text-center">YOUR CURRENT DATABASE WILL BE TRUNCATED!</h2>
+    <div asp-validation-summary="All" class="text-danger text-center display-4"></div>
+    <label for="fileSelect">Select your database file</label>
+    <input asp-for="@Model.formFile"/>
+    <button type="submit" class="btn btn-outline-primary mt-2">Send</button>
+</form>

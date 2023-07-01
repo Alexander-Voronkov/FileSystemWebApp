@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Add file";
+}
+
+@model FileViewModel
+
+<div asp-validation-summary="All" class="display-5 text-center text-danger"></div>
+
+<form enctype="multipart/form-data" asp-controller="Home" asp-action="AddNewFile">
+    <input type="hidden" asp-for="ParentFolderId"/>
+    <label asp-for="formFile"></label>
+    <input asp-for="formFile" />
+    <span asp-validation-for="formFile"></span>
+    <br />
+    <button type="submit" class="btn btn-outline-primary">Add file</button>
+</form>

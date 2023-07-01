@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+@model LoginViewModel
+<h2>Entry to the site</h2>
+<a asp-action="Register" asp-controller="Account" class="btn btn-lg btn-outline-primary mb-3">Registration</a>
+<form asp-action="Login" asp-controller="Account" asp-antiforgery="true">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <div class="form-floating mb-3">
+        <input type="text" asp-for="Email" class="form-control" placeholder="@nameof(Model.Email)" />
+        <label asp-for="Email"></label>
+        <span asp-validation-for="Email" class="text-danger" />
+    </div>
+    <div class="form-floating mb-3">
+        <input type="password" asp-for="Password" class="form-control" placeholder="@nameof(Model.Password)" />
+        <label asp-for="Password"></label>
+        <span asp-validation-for="Password" class="text-danger" />
+    </div>
+    <div class="mb-3">
+        <input type="submit" value="Login" class="btn btn-lg btn-primary" />
+    </div>
+</form>

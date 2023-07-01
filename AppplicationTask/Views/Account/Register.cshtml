@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+﻿
+@model RegisterViewModel
+
+<h2>Registration</h2>
+<form asp-action="Register"
+      asp-controller="Account"
+      asp-antiforgery="true">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <div class="form-floating mb-3">
+        <input type="text"
+               asp-for="Email"
+               class="form-control"
+               placeholder="@nameof(Model.Email)" />
+        <label asp-for="Email"></label>
+        <span asp-validation-for="Email" class="text-danger" />
+    </div>
+    <div class="form-floating mb-3">
+        <input type="password"
+               asp-for="Password"
+               class="form-control"
+               placeholder="@nameof(Model.Password)" />
+        <label asp-for="Password"></label>
+        <span asp-validation-for="Password" class="text-danger" />
+    </div>
+    <div class="form-floating mb-3">
+        <input type="password"
+               asp-for="ConfirmPassword"
+               class="form-control"
+               placeholder="@nameof(Model.ConfirmPassword)" />
+        <label asp-for="ConfirmPassword"></label>
+        <span asp-validation-for="ConfirmPassword" class="text-danger" />
+    </div>
+    <div class="mb-3">
+        <input type="submit"
+               value="Register"
+               class="btn btn-lg btn-primary" />
+    </div>
+</form>
